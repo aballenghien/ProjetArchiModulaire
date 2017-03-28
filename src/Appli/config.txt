@@ -1,0 +1,1 @@
+class=Projet_Architecture_modulaire.Plugins.Banque;Projet_Architecture_modulaire.Plugins.DebiterCompte;Projet_Architecture_modulaire.Plugins.CrediterCompte

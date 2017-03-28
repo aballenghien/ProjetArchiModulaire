@@ -1,4 +1,4 @@
-package Plugins;
+package appli.data;
 
 import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;

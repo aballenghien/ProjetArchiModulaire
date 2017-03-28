@@ -1,5 +1,8 @@
-package Plugins;
+package plugins;
 
+import appli.data.Compte;
+import appli.data.Operation;
+import appli.data.IModifCompte;
 import java.util.Date;
 
 public  class CrediterCompte implements IModifCompte{

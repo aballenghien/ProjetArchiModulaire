@@ -1,4 +1,4 @@
-package Plateforme;
+package plateforme;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -15,7 +15,7 @@ public class Loader {
 		InputStream is = new FileInputStream(filename);
 		p.load(is);
 		ArrayList<Object> listeobjet = new ArrayList<Object>();
-		// créer le beans
+		// crï¿½er le beans
 		String valeur = p.getProperty("class");
 		String[] test = valeur.split(";");
 		for (String s : test) {
