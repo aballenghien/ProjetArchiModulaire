@@ -9,7 +9,7 @@ package appli.data;
  *
  * @author Audrey
  */
-public interface IAfficheur {
+public interface IAfficheurCompte {
     
     public String afficher();
     
