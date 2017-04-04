@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package appli;
-
 import plateforme.Loader;
 import java.util.ArrayList;
 
