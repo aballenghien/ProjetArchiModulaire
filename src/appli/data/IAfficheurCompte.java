@@ -11,6 +11,7 @@ package appli.data;
  */
 public interface IAfficheurCompte {
     
-    public String afficher();
+    public String afficher(Compte c);
+    
     
 }
