@@ -10,7 +10,7 @@ public class Client {
 	private String nom;
 	private int Id;
 	private String adresse;
-	private String numero;
+	private String numeroTel;
 
 	public Client(String nom, int id, String adresse, String numero) {
 		super();
@@ -18,7 +18,7 @@ public class Client {
 		this.nom = nom;
 		Id = id;
 		this.adresse = adresse;
-		this.numero = numero;
+		this.numeroTel = numero;
 	}
 
 	public String getNom() {
@@ -46,11 +46,11 @@ public class Client {
 	}
 
 	public String getNumero() {
-		return numero;
+		return numeroTel;
 	}
 
 	public void setNumero(String numero) {
-		this.numero = numero;
+		this.numeroTel = numero;
 	}
 
 	public ArrayList<Compte> getComptes() {

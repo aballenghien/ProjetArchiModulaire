@@ -5,13 +5,15 @@
  */
 package appli.data;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  *
  * @author Audrey
  */
-public interface IAfficheurCompte {
+public interface IAfficheur {
     
-    public String afficher(Compte c);
-    
+    public HashMap<String,String> afficher(Object o);
     
 }

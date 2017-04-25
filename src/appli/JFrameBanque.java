@@ -4,8 +4,16 @@
  * and open the template in the editor.
  */
 package appli;
+
+import appli.data.Banque;
+import appli.data.Client;
+import appli.data.Compte;
+import appli.data.IDescription;
 import plateforme.Loader;
 import java.util.ArrayList;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import appli.data.IAfficheur;
 
 /**
  *
@@ -49,10 +57,10 @@ public class JFrameBanque extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(138, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51))
         );
 
         pack();
@@ -88,11 +96,41 @@ public class JFrameBanque extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                //ArrayList<Object> lstPlugins = Loader.getPlugin("D:\\DOCUMENTS\\DEVELOPPEMENT\\NET BEANS\\Projet_Archi_modulaire\\src\\tp_archi_modulaire\\appli\\config.txt", contrainte)
-                new JFrameBanque().setVisible(true);
+                JFrameBanque j = new JFrameBanque();
+                Banque banque = new Banque();
+                Loader loader = Loader.getInstance();
+                ArrayList<IDescription> list = loader.getPluginsDescriptions(IAfficheur.class);
+                if (list.size() > 0) {
+                    IAfficheur afficheur = (IAfficheur) loader.getPlugin(list.get(0));
+                    for (Client client : banque.getClients()) {
+                        for (Compte compte : client.getComptes()) {
+
+                            j.getjTextArea1().setText(afficheur.afficher(compte));
+                        }
+                    }
+                }
+
+                j.setVisible(true);
             }
         });
     }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public void setjScrollPane1(JScrollPane jScrollPane1) {
+        this.jScrollPane1 = jScrollPane1;
+    }
+
+    public JTextArea getjTextArea1() {
+        return jTextArea1;
+    }
+
+    public void setjTextArea1(JTextArea jTextArea1) {
+        this.jTextArea1 = jTextArea1;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;

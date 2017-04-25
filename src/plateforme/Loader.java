@@ -21,6 +21,7 @@ public class Loader {
 
     private Loader() {
         this.lstDescPlugins = new ArrayList<>();
+        loadPluginsDescriptions();
     }
 
     public static Loader getInstance() {
@@ -57,7 +58,7 @@ public class Loader {
     public ArrayList<IDescription> getPluginsDescriptions(Class<?> contrainte) {
         ArrayList<IDescription> lstPluginDescriptions = new ArrayList<>();
         for (IDescription iDesc : this.lstDescPlugins) {
-            if (contrainte.getName().equals(iDesc.getDescClasse())) {
+            if (contrainte.getName().equals(iDesc.getDescContrainte())) {
                 lstPluginDescriptions.add(iDesc);
             }
 
@@ -65,7 +66,7 @@ public class Loader {
         return lstPluginDescriptions;
     }
 
-    public Optional<Object> getPlugin(IDescription desc) {
+    public Object getPlugin(IDescription desc) {
         Object o = null;
         try {
 
@@ -78,7 +79,7 @@ public class Loader {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(Loader.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return Optional.ofNullable(o);
+        return o;
 
     }
 }
