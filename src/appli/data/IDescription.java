@@ -14,8 +14,4 @@ public interface IDescription {
     public String getNom();
     public String getDescContrainte();
     public String getDescClasse();
-    public Class<?> getContrainte();
-    public Class<?> getClasse();
-    public void setContrainte(Class<?> contrainte);
-    public void setClasse(Class<?> classe);
 }

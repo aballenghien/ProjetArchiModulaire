@@ -57,22 +57,8 @@ public class Loader {
     public ArrayList<IDescription> getPluginsDescriptions(Class<?> contrainte) {
         ArrayList<IDescription> lstPluginDescriptions = new ArrayList<>();
         for (IDescription iDesc : this.lstDescPlugins) {
-            Class<?> cl;
-            try {
-                
-// TODO éviter d(utiliser des Class.forName dans cette fonction, comparer le nom complet 
-// du paramètre en entrée avec la contrainte de description, si bon instancier la bonne valeur
-
-// TODO déplacer le classForName de la classe dans la fonction getPlugin (à la limite plus besoin de l'attribut classe 
-// dans la description
-                cl = Class.forName(iDesc.getDescContrainte());
-                if (contrainte.isAssignableFrom(cl)) {
-                    iDesc.setContrainte(cl);
-                    iDesc.setClasse(Class.forName(iDesc.getDescClasse()));
-                    lstPluginDescriptions.add(iDesc);
-                }
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Loader.class.getName()).log(Level.SEVERE, null, ex);
+            if (contrainte.getName().equals(iDesc.getDescClasse())) {
+                lstPluginDescriptions.add(iDesc);
             }
 
         }
@@ -81,14 +67,18 @@ public class Loader {
 
     public Optional<Object> getPlugin(IDescription desc) {
         Object o = null;
-        if(desc.getContrainte().isAssignableFrom(desc.getClasse())){
-            try {                
-                o = desc.getClasse().newInstance();
-            } catch (InstantiationException | IllegalAccessException ex) {
-                Logger.getLogger(Loader.class.getName()).log(Level.SEVERE, null, ex);
+        try {
+
+            Class<?> cl = Class.forName(desc.getDescClasse());
+            Class<?> contrainte = Class.forName(desc.getDescContrainte());
+            if (contrainte.isAssignableFrom(cl)) {
+                o = cl.newInstance();
             }
+
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+            Logger.getLogger(Loader.class.getName()).log(Level.SEVERE, null, ex);
         }
         return Optional.ofNullable(o);
-        
+
     }
 }
