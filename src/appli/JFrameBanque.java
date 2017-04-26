@@ -21,6 +21,7 @@ import appli.data.Client;
 import appli.data.Compte;
 import appli.data.IAfficheur;
 import appli.data.IDescription;
+import appli.data.IModifCompte;
 import plateforme.Loader;
 
 /**
@@ -33,6 +34,15 @@ public class JFrameBanque extends javax.swing.JFrame {
 	 * Creates new form JFrameBanque
 	 */
 	private ArrayList<IDescription> listDescriptionPluging;
+        private Client client ;
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Client getClient() {
+        return client;
+    }
 
 	public JFrameBanque() {
 		initComponents();
@@ -65,6 +75,20 @@ public class JFrameBanque extends javax.swing.JFrame {
 			tableModel.addRow(unClient.toArray());
 		}
 		jTableClient.setModel(tableModel);
+
+	}
+        public void effectuerOperation() {
+		     IModifCompte modifcrediter = (IModifCompte) Loader.getInstance().getPlugin(this.getListDescriptionPluging().get(2));
+                       IModifCompte modifdebiter = (IModifCompte) Loader.getInstance().getPlugin(this.getListDescriptionPluging().get(3));
+
+                 int idCOmpte = Integer.valueOf(jTableCompte.getValueAt(jTableCompte.getSelectedRow(), 0).toString());
+           Compte c= this.getClient().chercherCompte(idCOmpte);
+		float montant= Float.valueOf(jTextFieldMontant.getText());
+		if (montant>0)
+                    modifcrediter.modifier(c,montant);
+		if(montant<0){
+                    modifdebiter.modifier(c,montant);
+                }
 
 	}
 
@@ -203,7 +227,11 @@ public class JFrameBanque extends javax.swing.JFrame {
 
 					@Override
 					public void valueChanged(ListSelectionEvent e) {
-						j.afficherCompte(banque.chercherClient(j.getjTableClient().getSelectedRow()));
+                                           Client c =banque.chercherClient(j.getjTableClient().getSelectedRow());
+						j.afficherCompte(c);
+                                                j.setClient(c);
+                                                
+                                                
 					}
 				});
 				j.setVisible(true);
