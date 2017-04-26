@@ -12,14 +12,15 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-
-import appli.data.Banque;
-import appli.data.Client;
-import appli.data.IAfficheur;
-import appli.data.IDescription;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+
+import appli.data.Banque;
+import appli.data.Client;
+import appli.data.Compte;
+import appli.data.IAfficheur;
+import appli.data.IDescription;
 import plateforme.Loader;
 
 /**
@@ -39,21 +40,32 @@ public class JFrameBanque extends javax.swing.JFrame {
 
 	public void afficherCompte(Client client) {
 		IAfficheur afficheur = (IAfficheur) Loader.getInstance().getPlugin(this.getListDescriptionPluging().get(1));
+		ArrayList<String> entete = afficheur.afficherEntete();
+		DefaultTableModel tableModel = (DefaultTableModel) this.jTableCompte.getModel();
+		tableModel.setColumnIdentifiers(entete.toArray());
+		ArrayList<String> compte = new ArrayList();
+
+		for (Compte list : client.getComptes()) {
+			compte = afficheur.afficher(list);
+			tableModel.addRow(compte.toArray());
+		}
+		jTableCompte.setModel(tableModel);
 	}
 
 	public void afficherClient(Banque banque) {
 		IAfficheur afficheur = (IAfficheur) Loader.getInstance().getPlugin(this.getListDescriptionPluging().get(0));
-                ArrayList<String> entete = afficheur.afficherEntete();
-                DefaultTableModel tableModel = (DefaultTableModel) this.jTableClient.getModel();
-                tableModel.setRowCount(0);
-                tableModel.setColumnIdentifiers(entete.toArray());
-                ArrayList<String> unClient = new ArrayList();
-                for(Client c : banque.getClients()){
-                    unClient = afficheur.afficher(c);
-                    tableModel.addRow(unClient.toArray());
-                }
-                jTableClient.setModel(tableModel);
-                
+
+		ArrayList<String> entete = afficheur.afficherEntete();
+		DefaultTableModel tableModel = (DefaultTableModel) this.jTableClient.getModel();
+		tableModel.setRowCount(0);
+		tableModel.setColumnIdentifiers(entete.toArray());
+		ArrayList<String> unClient = new ArrayList();
+		for (Client c : banque.getClients()) {
+			unClient = afficheur.afficher(c);
+			tableModel.addRow(unClient.toArray());
+		}
+		jTableClient.setModel(tableModel);
+
 	}
 
 	/**
@@ -225,6 +237,13 @@ public class JFrameBanque extends javax.swing.JFrame {
 				Loader loader = Loader.getInstance();
 				j.setListDescriptionPluging(loader.getPluginsDescriptions(IAfficheur.class));
 				j.afficherClient(banque);
+				j.getjTableClient().getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+
+					@Override
+					public void valueChanged(ListSelectionEvent e) {
+						j.afficherCompte(banque.chercherClient(j.getjTableClient().getSelectedRow()));
+					}
+				});
 				j.setVisible(true);
 			}
 		});

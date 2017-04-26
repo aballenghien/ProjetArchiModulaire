@@ -27,4 +27,14 @@ public class Banque {
 		this.clients.add(client1);
 	}
 
+	public Client chercherClient(int id) {
+		Client client = null;
+		for (Client list : clients) {
+			if (list.getId() == id) {
+				client = list;
+			}
+		}
+		return client;
+	}
+
 }
