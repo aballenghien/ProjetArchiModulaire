@@ -17,6 +17,7 @@ import appli.data.Banque;
 import appli.data.Client;
 import appli.data.IAfficheur;
 import appli.data.IDescription;
+import javax.swing.table.DefaultTableModel;
 import plateforme.Loader;
 
 /**
@@ -38,8 +39,17 @@ public class JFrameBanque extends javax.swing.JFrame {
 		IAfficheur afficheur = (IAfficheur) Loader.getInstance().getPlugin(this.getListDescriptionPluging().get(1));
 	}
 
-	public void afficherClient() {
+	public void afficherClient(Banque banque) {
 		IAfficheur afficheur = (IAfficheur) Loader.getInstance().getPlugin(this.getListDescriptionPluging().get(0));
+                ArrayList<String> entete = afficheur.afficherEntete();
+                DefaultTableModel tableModel = (DefaultTableModel) this.jTableClient.getModel();
+                tableModel.setColumnIdentifiers(entete.toArray());
+                ArrayList<String> unClient = new ArrayList();
+                for(Client c : banque.getClients()){
+                    unClient = afficheur.afficher(c);
+                    tableModel.addRow(unClient.toArray());
+                }
+                jTableClient.setModel(tableModel);
 	}
 
 	/**
@@ -172,7 +182,7 @@ public class JFrameBanque extends javax.swing.JFrame {
 				Banque banque = new Banque();
 				Loader loader = Loader.getInstance();
 				j.setListDescriptionPluging(loader.getPluginsDescriptions(IAfficheur.class));
-				j.afficherClient();
+				j.afficherClient(banque);
 				j.setVisible(true);
 			}
 		});
