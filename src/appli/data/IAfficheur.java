@@ -6,14 +6,15 @@
 package appli.data;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  *
  * @author Audrey
  */
 public interface IAfficheur {
-    
-    public HashMap<String,String> afficher(Object o);
-    
+
+	public ArrayList<String> afficher(Object o);
+
+	public ArrayList<String> afficherEntete(Object o);
+
 }
