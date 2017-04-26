@@ -5,11 +5,11 @@ import java.util.ArrayList;
 public class Client {
 
 	private ArrayList<Compte> comptes;
-
+        private int Id;
 	private String nom;
-	private int Id;
-	private String adresse;
 	private String numeroTel;
+	private String adresse;
+	
 
 	public Client(String nom, int id, String adresse, String numero) {
 		super();

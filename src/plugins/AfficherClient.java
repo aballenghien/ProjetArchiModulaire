@@ -22,21 +22,23 @@ public class AfficherClient implements IAfficheur {
 		ArrayList<String> lstValeurs = new ArrayList();
 		lstValeurs.add(String.valueOf(c.getId()));
 		lstValeurs.add(c.getNom());
-		lstValeurs.add(c.getAdresse());
 		lstValeurs.add(c.getNumeroTel());
-		/*
-		lstValeurs.put("identifiant", String.valueOf(c.getId()));
-		lstValeurs.put("nom", c.getNom());
-		lstValeurs.put("adresse", c.getAdresse());
-		lstValeurs.put("numéro de téléphone", c.getNumeroTel());
-		*/
+                lstValeurs.add(c.getAdresse());
+		
 		return lstValeurs;
 	}
 
 	@Override
 	public ArrayList<String> afficherEntete(Object o) {
-		// TODO Auto-generated method stub
-		return null;
+            	Client c = (Client) o;
+		ArrayList<String> lstEnteteCompte = new ArrayList();
+                lstEnteteCompte.add("Code_Client");
+                lstEnteteCompte.add("Nom");
+                lstEnteteCompte.add("NumÃ©ro TÃ©lÃ©phone");
+                lstEnteteCompte.add("Adresse");
+             
+               
+		return lstEnteteCompte;
 	}
 
 }
