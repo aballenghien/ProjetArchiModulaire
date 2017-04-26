@@ -1,0 +1,3 @@
+nom=AfficherClient
+contrainte=appli.data.IAfficheur
+class=plugins.AfficherClient

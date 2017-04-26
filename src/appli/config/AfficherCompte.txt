@@ -1,0 +1,3 @@
+nom=AfficherCompte
+contrainte=appli.data.IAfficheur
+class=plugins.AfficherCompte

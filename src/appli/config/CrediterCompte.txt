@@ -1,0 +1,3 @@
+nom=CrediterCompte
+contrainte=appli.data.IModifCompte
+class=plugins.CrediterCompte
