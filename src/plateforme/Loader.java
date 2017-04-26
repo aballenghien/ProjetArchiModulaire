@@ -45,6 +45,7 @@ public class Loader {
                     String classe = p.getProperty("class");
                     DescriptionPlugins desc = new DescriptionPlugins(nom, classe, contrainte);
                     this.lstDescPlugins.add(desc);
+                    
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger(Loader.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IOException ex) {
@@ -53,6 +54,7 @@ public class Loader {
 
             }
         }
+
     }
 
     public ArrayList<IDescription> getPluginsDescriptions(Class<?> contrainte) {

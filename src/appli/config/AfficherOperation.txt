@@ -1,0 +1,3 @@
+nom=AfficherOperation
+contrainte=appli.data.IAfficheur
+class=plugins.AfficherOperation

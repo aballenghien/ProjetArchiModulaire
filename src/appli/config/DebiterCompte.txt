@@ -1,0 +1,3 @@
+nom=DebiterCompte
+contrainte=appli.data.IModifCompte
+class=plugins.DebiterCompte

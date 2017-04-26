@@ -43,6 +43,7 @@ public class JFrameBanque extends javax.swing.JFrame {
 		IAfficheur afficheur = (IAfficheur) Loader.getInstance().getPlugin(this.getListDescriptionPluging().get(0));
                 ArrayList<String> entete = afficheur.afficherEntete();
                 DefaultTableModel tableModel = (DefaultTableModel) this.jTableClient.getModel();
+                tableModel.setRowCount(0);
                 tableModel.setColumnIdentifiers(entete.toArray());
                 ArrayList<String> unClient = new ArrayList();
                 for(Client c : banque.getClients()){
