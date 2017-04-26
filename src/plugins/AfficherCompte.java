@@ -5,24 +5,33 @@
  */
 package plugins;
 
+import java.util.ArrayList;
+
 import appli.data.Compte;
 import appli.data.IAfficheur;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  *
  * @author Audrey
  */
-public class AfficherCompte implements IAfficheur{
+public class AfficherCompte implements IAfficheur {
 
-    @Override
-    public HashMap<String,String> afficher(Object o) {
-        Compte c = (Compte) o;
-        HashMap<String,String> lstValeurs = new HashMap<>();
-        lstValeurs.put("Numéro de Compte", String.valueOf(c.getNumeroCompte()));
-        lstValeurs.put("Solde", String.valueOf(c.getSolde()));
-        return lstValeurs;
-        
-    }
+	@Override
+	public ArrayList<String> afficher(Object o) {
+		Compte c = (Compte) o;
+		ArrayList lstValeurs = new ArrayList();
+		lstValeurs.add(String.valueOf(c.getNumeroCompte()));
+		lstValeurs.add(String.valueOf(c.getSolde()));
+		/*suivis des autres attrivbuts */
+
+		return lstValeurs;
+
+	}
+
+	@Override
+	public ArrayList<String> afficherEntete(Object o) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

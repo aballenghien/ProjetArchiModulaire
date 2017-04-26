@@ -5,26 +5,38 @@
  */
 package plugins;
 
-import appli.data.Client;
-import appli.data.Compte;
-import appli.data.IAfficheur;
 import java.util.ArrayList;
-import java.util.HashMap;
+
+import appli.data.Client;
+import appli.data.IAfficheur;
 
 /**
  *
  * @author Audrey
  */
-public class AfficherClient implements IAfficheur{
+public class AfficherClient implements IAfficheur {
 
-    @Override
-    public HashMap<String, String> afficher(Object o) {
-        Client c = (Client) o;
-        HashMap<String,String> lstValeurs = new HashMap<>();
-        lstValeurs.put("identifiant",String.valueOf(c.getId()));
-        lstValeurs.put("", value)
-    }
+	@Override
+	public ArrayList<String> afficher(Object o) {
+		Client c = (Client) o;
+		ArrayList<String> lstValeurs = new ArrayList();
+		lstValeurs.add(String.valueOf(c.getId()));
+		lstValeurs.add(c.getNom());
+		lstValeurs.add(c.getAdresse());
+		lstValeurs.add(c.getNumeroTel());
+		/*
+		lstValeurs.put("identifiant", String.valueOf(c.getId()));
+		lstValeurs.put("nom", c.getNom());
+		lstValeurs.put("adresse", c.getAdresse());
+		lstValeurs.put("numéro de téléphone", c.getNumeroTel());
+		*/
+		return lstValeurs;
+	}
 
-    
-    
+	@Override
+	public ArrayList<String> afficherEntete(Object o) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -1,6 +1,5 @@
 package appli.data;
 
-import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 
 public class Client {
@@ -45,11 +44,11 @@ public class Client {
 		this.adresse = adresse;
 	}
 
-	public String getNumero() {
+	public String getNumeroTel() {
 		return numeroTel;
 	}
 
-	public void setNumero(String numero) {
+	public void setNumeroTel(String numero) {
 		this.numeroTel = numero;
 	}
 
