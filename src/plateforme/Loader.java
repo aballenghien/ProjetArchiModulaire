@@ -1,19 +1,20 @@
 package plateforme;
 
-import appli.data.IDescription;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import appli.data.IDescription;
 import plugins.DescriptionPlugins;
 
 public class Loader {
+
 
     private static Loader loader = null;
 	
@@ -86,3 +87,4 @@ public class Loader {
 
     }
 }
+	
