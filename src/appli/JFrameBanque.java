@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 
 import appli.data.Banque;
 import appli.data.Client;
+import appli.data.Compte;
 import appli.data.IAfficheur;
 import appli.data.IDescription;
 import plateforme.Loader;
@@ -36,6 +37,12 @@ public class JFrameBanque extends javax.swing.JFrame {
 
 	public void afficherCompte(Client client) {
 		IAfficheur afficheur = (IAfficheur) Loader.getInstance().getPlugin(this.getListDescriptionPluging().get(1));
+		ArrayList<String> donnes = null;
+		ArrayList<String> entetes = afficheur.afficherEntete();
+		for (Compte list : client.getComptes()) {
+			donnes.addAll(afficheur.afficher((Compte) list));
+		}
+		this.setjTableCompte(entetes, donnes);
 	}
 
 	public void afficherClient() {
