@@ -42,6 +42,7 @@ public class JFrameBanque extends javax.swing.JFrame {
 		IAfficheur afficheur = (IAfficheur) Loader.getInstance().getPlugin(this.getListDescriptionPluging().get(1));
 		ArrayList<String> entete = afficheur.afficherEntete();
 		DefaultTableModel tableModel = (DefaultTableModel) this.jTableCompte.getModel();
+		tableModel.setRowCount(0);
 		tableModel.setColumnIdentifiers(entete.toArray());
 		ArrayList<String> compte = new ArrayList();
 
@@ -203,9 +204,11 @@ public class JFrameBanque extends javax.swing.JFrame {
 
 					@Override
 					public void valueChanged(ListSelectionEvent e) {
-						j.afficherCompte(banque.chercherClient(j.getjTableClient().getSelectedRow()));
+						j.afficherCompte(banque.chercherClient(Integer.parseInt(
+								j.getjTableClient().getValueAt(j.getjTableClient().getSelectedRow(), 0).toString())));
 					}
 				});
+				j.setLocationRelativeTo(null);
 				j.setVisible(true);
 			}
 		});
