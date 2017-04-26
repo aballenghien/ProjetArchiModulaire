@@ -59,5 +59,14 @@ public class Client {
 	public void setComptes(ArrayList<Compte> comptes) {
 		this.comptes = comptes;
 	}
+        public Compte chercherCompte(int id ){
+            Compte compteresultat= null;
+            for(Compte c :comptes ){
+                if (c.getNumeroCompte()==id){
+                    compteresultat=c;
+                }
+            }
+            return compteresultat;
+        }
 
 }

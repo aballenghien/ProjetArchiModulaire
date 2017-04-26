@@ -16,7 +16,8 @@ import plugins.DescriptionPlugins;
 public class Loader {
 
     private static Loader loader = null;
-    private final String NOM_REPERTOIRE = "D:\\DOCUMENTS\\DEVELOPPEMENT\\NET BEANS\\Projet_Architecture_modulaire\\src\\appli\\config";
+	
+    private final String NOM_REPERTOIRE = "C:\\Users\\meloufir\\git\\ProjetArchiModulaire\\src\\appli\\config";
     private final ArrayList<IDescription> lstDescPlugins;
 
     private Loader() {
