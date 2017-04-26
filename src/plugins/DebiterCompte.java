@@ -8,13 +8,20 @@ import java.util.Date;
 public class DebiterCompte implements IModifCompte {
 
     @Override
-    public Boolean modifier(Compte compte, float montant) {
+    public boolean modifier(Compte compte, float montant) {
         float solde = compte.getSolde();
+        int dernierNumeroOperation = 0;
+        if (compte.getOperations().size() > 0) {
+            dernierNumeroOperation = compte.getOperations()
+                    .get(compte.getOperations().size() - 1)
+                    .getNumeroOperation();
+        }
         if (solde > montant) {
             compte.setSolde(compte.getSolde() - montant);
             if (compte.getSolde() <= solde) {
-                Operation op = new Operation(compte, new Date(), new Date(), compte.getOperation().get(compte.getOperation().size() - 1).getNumeroOperation() + 1);
-                compte.getOperation().add(op);
+                Operation op = new Operation(compte, new Date(), new Date(), dernierNumeroOperation + 1, compte.getSolde());
+                op.setDebit(montant);
+                compte.getOperations().add(op);
                 return true;
             } else {
                 return false;

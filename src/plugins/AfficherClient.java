@@ -16,29 +16,27 @@ import appli.data.IAfficheur;
  */
 public class AfficherClient implements IAfficheur {
 
-	@Override
-	public ArrayList<String> afficher(Object o) {
-		Client c = (Client) o;
-		ArrayList<String> lstValeurs = new ArrayList();
-		lstValeurs.add(String.valueOf(c.getId()));
-		lstValeurs.add(c.getNom());
-		lstValeurs.add(c.getNumeroTel());
-                lstValeurs.add(c.getAdresse());
-		
-		return lstValeurs;
-	}
+    @Override
+    public ArrayList<String> afficher(Object o) {
+        Client c = (Client) o;
+        ArrayList<String> lstValeurs = new ArrayList();
+        lstValeurs.add(String.valueOf(c.getId()));
+        lstValeurs.add(c.getNom());
+        lstValeurs.add(c.getNumeroTel());
+        lstValeurs.add(c.getAdresse());
 
-	@Override
-	public ArrayList<String> afficherEntete() {
-            
-		ArrayList<String> lstEnteteCompte = new ArrayList();
-                lstEnteteCompte.add("Code_Client");
-                lstEnteteCompte.add("Nom");
-                lstEnteteCompte.add("Numéro Téléphone");
-                lstEnteteCompte.add("Adresse");
-             
-               
-		return lstEnteteCompte;
-	}
+        return lstValeurs;
+    }
+
+    @Override
+    public ArrayList<String> afficherEntete() {
+
+        ArrayList<String> lstEnteteCompte = new ArrayList();
+        lstEnteteCompte.add("Code Client");
+        lstEnteteCompte.add("Nom");
+        lstEnteteCompte.add("Numéro de téléphone");
+        lstEnteteCompte.add("Adresse");
+        return lstEnteteCompte;
+    }
 
 }

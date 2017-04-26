@@ -3,50 +3,80 @@ package appli.data;
 import java.util.Date;
 
 public class Operation {
-	private Compte compte;
-	private Date dateEffectif;
-	private Date dateReel;
-	private int numeroOperation;
 
-	public Operation(Compte compte, Date dateEffectif, Date dateReel, int numeroOperation) {
-		super();
-		this.compte = compte;
-		this.dateEffectif = dateEffectif;
-		this.dateReel = dateReel;
-		this.numeroOperation = numeroOperation;
-	}
+    private Compte compte;
+    private Date dateEffectif;
+    private Date dateReel;
+    private int numeroOperation;
+    private float soldeCompte;
+    private float credit;
+    private float debit;
 
-	public Date getDateEffectif() {
-		return dateEffectif;
-	}
+    public Operation(Compte compte, Date dateEffectif, Date dateReel, int numeroOperation, float solde) {
+        super();
+        this.compte = compte;
+        this.dateEffectif = dateEffectif;
+        this.dateReel = dateReel;
+        this.numeroOperation = numeroOperation;
+        this.soldeCompte = solde;
+        this.credit = 0;
+        this.debit = 0;
+    }
 
-	public void setDateEffectif(Date dateEffectif) {
-		this.dateEffectif = dateEffectif;
-	}
+    public Date getDateEffectif() {
+        return dateEffectif;
+    }
 
-	public Date getDateReel() {
-		return dateReel;
-	}
+    public void setDateEffectif(Date dateEffectif) {
+        this.dateEffectif = dateEffectif;
+    }
 
-	public void setDateReel(Date dateReel) {
-		this.dateReel = dateReel;
-	}
+    public Date getDateReel() {
+        return dateReel;
+    }
 
-	public int getNumeroOperation() {
-		return numeroOperation;
-	}
+    public void setDateReel(Date dateReel) {
+        this.dateReel = dateReel;
+    }
 
-	public void setNumeroOperation(int numeroOperation) {
-		this.numeroOperation = numeroOperation;
-	}
+    public int getNumeroOperation() {
+        return numeroOperation;
+    }
 
-	public Compte getCompte() {
-		return compte;
-	}
+    public void setNumeroOperation(int numeroOperation) {
+        this.numeroOperation = numeroOperation;
+    }
 
-	public void setCompte(Compte compte) {
-		this.compte = compte;
-	}
+    public Compte getCompte() {
+        return compte;
+    }
 
-	
+    public void setCompte(Compte compte) {
+        this.compte = compte;
+    }
+
+    public float getSoldeCompte() {
+        return soldeCompte;
+    }
+
+    public void setSoldeCompte(float soldeCompte) {
+        this.soldeCompte = soldeCompte;
+    }
+
+    public float getCredit() {
+        return credit;
+    }
+
+    public void setCredit(float credit) {
+        this.credit = credit;
+    }
+
+    public float getDebit() {
+        return debit;
+    }
+
+    public void setDebit(float debit) {
+        this.debit = debit;
+    }
+
 }

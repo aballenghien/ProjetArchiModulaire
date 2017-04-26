@@ -13,8 +13,19 @@ import java.util.ArrayList;
  */
 public interface IAfficheur {
 
-	public ArrayList<String> afficher(Object o);
+    /**
+     * Affiche la liste des valeurs des attributs de l'objet
+     *
+     * @param o Object
+     * @return ArrayList String
+     */
+    ArrayList<String> afficher(Object o);
 
-	public ArrayList<String> afficherEntete();
+    /**
+     * Affiche la liste des attributs de l'objet sous forme de titre
+     *
+     * @return ArrayList String
+     */
+    ArrayList<String> afficherEntete();
 
 }

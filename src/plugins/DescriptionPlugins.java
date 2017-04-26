@@ -11,24 +11,22 @@ import appli.data.IDescription;
  *
  * @author Audrey
  */
-public class DescriptionPlugins implements IDescription{
+public class DescriptionPlugins implements IDescription {
 
     private String nom;
     private String descClasse;
     private String descContrainte;
 
-    public DescriptionPlugins(String nom,  String descClasse,String descContrainte) {
+    public DescriptionPlugins(String nom, String descClasse, String descContrainte) {
         this.nom = nom;
         this.descClasse = descClasse;
         this.descContrainte = descContrainte;
-    }   
-    
+    }
+
     @Override
     public String getNom() {
         return this.nom;
     }
-
-
 
     @Override
     public String getDescContrainte() {
@@ -40,5 +38,4 @@ public class DescriptionPlugins implements IDescription{
         return this.descClasse;
     }
 
-    
 }

@@ -10,8 +10,10 @@ package appli.data;
  * @author Audrey
  */
 public interface IDescription {
-        
-    public String getNom();
-    public String getDescContrainte();
-    public String getDescClasse();
+
+    String getNom();
+
+    String getDescContrainte();
+
+    String getDescClasse();
 }

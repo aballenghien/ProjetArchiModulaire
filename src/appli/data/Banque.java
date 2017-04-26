@@ -2,39 +2,50 @@ package appli.data;
 
 import java.util.ArrayList;
 
-public class Banque {
-	private ArrayList<Client> clients;
+public final class Banque {
 
-	public Banque() {
-		super();
-		this.clients = new ArrayList<Client>();
-		chargerBanque();
-	}
+    private ArrayList<Client> clients;
 
-	public ArrayList<Client> getClients() {
-		return clients;
-	}
+    public Banque() {
+        super();
+        this.clients = new ArrayList<>();
+        chargerBanque();
+    }
 
-	public void setClients(ArrayList<Client> clients) {
-		this.clients = clients;
-	}
+    public ArrayList<Client> getClients() {
+        return clients;
+    }
 
-	public void chargerBanque() {
-		Client client1 = new Client("alae", 1, "Nantes", "066666666");
+    public void setClients(ArrayList<Client> clients) {
+        this.clients = clients;
+    }
 
-		Compte compteClient1 = new Compte(client1, 2, 1000000);
-		client1.getComptes().add(compteClient1);
-		this.clients.add(client1);
-	}
+    /**
+     * Charge des données fictives pour la banque
+     */
+    public void chargerBanque() {
+        Client client1 = new Client("alae", 1, "Nantes", "066666666");
 
-	public Client chercherClient(int id) {
-		Client client = null;
-		for (Client list : clients) {
-			if (list.getId() == id) {
-				client = list;
-			}
-		}
-		return client;
-	}
+        Compte compteClient1 = new Compte(client1, 2, 1000000);
+        client1.getComptes().add(compteClient1);
+        this.clients.add(client1);
+    }
+
+    /**
+     * Recherche un client dans la liste des clients de la banque à partir de
+     * son id
+     *
+     * @param id int
+     * @return Client
+     */
+    public Client chercherClient(int id) {
+        Client client = null;
+        for (Client list : clients) {
+            if (list.getId() == id) {
+                client = list;
+            }
+        }
+        return client;
+    }
 
 }
