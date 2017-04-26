@@ -22,6 +22,7 @@ import appli.data.Client;
 import appli.data.Compte;
 import appli.data.IAfficheur;
 import appli.data.IDescription;
+import appli.data.IModifCompte;
 import plateforme.Loader;
 
 /**
@@ -30,6 +31,16 @@ import plateforme.Loader;
  */
 public class JFrameBanque extends javax.swing.JFrame {
 
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    private Client client ;
+    
 	/**
 	 * Creates new form JFrameBanque
 	 */
@@ -38,6 +49,21 @@ public class JFrameBanque extends javax.swing.JFrame {
 	public JFrameBanque() {
 		initComponents();
 	}
+        public void effectuerOperation(){
+            IModifCompte modifCrediter= (IModifCompte) Loader.getInstance().getPlugin(this.getListDescriptionPluging().get(2));
+                  IModifCompte modifdebiter= (IModifCompte) Loader.getInstance().getPlugin(this.getListDescriptionPluging().get(3));
+                  
+                  Compte c= this.getClient().chercherCompte(Integer.parseInt(jTableCompte.getValueAt(jTableCompte.getSelectedRow(), 0).toString()));
+                  Float montant = Float.valueOf(jTextFieldMontant.getText());
+                  
+                  if (montant>0){
+                      modifCrediter.modifier(c, montant);
+                      
+                  }else if(montant>0)
+                  {
+                            modifdebiter.modifier (c, montant)  ;                   
+                  }
+        }
 
 	public void afficherCompte(Client client) {
 		IAfficheur afficheur = (IAfficheur) Loader.getInstance().getPlugin(this.getListDescriptionPluging().get(1));
@@ -244,6 +270,8 @@ public class JFrameBanque extends javax.swing.JFrame {
 					@Override
 					public void valueChanged(ListSelectionEvent e) {
 						j.afficherCompte(banque.chercherClient(Integer.parseInt(
+								j.getjTableClient().getValueAt(j.getjTableClient().getSelectedRow(), 0).toString())));
+                                                j.setClient(banque.chercherClient(Integer.parseInt(
 								j.getjTableClient().getValueAt(j.getjTableClient().getSelectedRow(), 0).toString())));
 					}
 				});
