@@ -28,6 +28,7 @@ public class AfficherOperation implements IAfficheur {
         lstEntete.add("Date_effectif");
         lstEntete.add("Date_Reel");
         return lstEntete;
+        
 
 }
 }
