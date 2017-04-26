@@ -14,7 +14,11 @@ import java.util.ArrayList;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import appli.data.IAfficheur;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 
 /**
  *
@@ -97,44 +101,37 @@ public class JFrameBanque extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabelClient)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelCompte)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(jLabelClient))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(109, 109, 109)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextFieldMontant, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(146, 146, 146)
-                                .addComponent(jButtonValider))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(jLabelCompte)))
-                .addContainerGap(641, Short.MAX_VALUE))
+                        .addComponent(jLabel1)
+                        .addGap(29, 29, 29)
+                        .addComponent(jTextFieldMontant, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonValider)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelClient)
-                .addGap(46, 46, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabelCompte)
-                .addGap(13, 13, 13)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(122, 122, 122)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldMontant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonValider)
-                    .addComponent(jLabel1))
-                .addGap(286, 286, 286))
+                    .addComponent(jLabel1)
+                    .addComponent(jButtonValider))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -182,10 +179,7 @@ public class JFrameBanque extends javax.swing.JFrame {
                     IAfficheur afficheur = (IAfficheur) loader.getPlugin(list.get(0));
                     for (Client client : banque.getClients()) {
                         for (Compte compte : client.getComptes()) {
-//for(String lst : afficheur.afficher(client).keySet()){
-    
-//}
-                         //   j.getjList1().add(afficheur.afficher(client));
+
                         }
                     }
                 }
@@ -195,29 +189,83 @@ public class JFrameBanque extends javax.swing.JFrame {
         });
     }
 
-    public JScrollPane getjScrollPane1() {
-        return jScrollPane1;
+    public JButton getjButtonValider() {
+        return jButtonValider;
     }
 
-    public void setjScrollPane1(JScrollPane jScrollPane1) {
-        this.jScrollPane1 = jScrollPane1;
+    public void setjButtonValider(JButton jButtonValider) {
+        this.jButtonValider = jButtonValider;
     }
 
-    public JTextArea getjTextArea1() {
-        return jTextArea1;
+    public JLabel getjLabel1() {
+        return jLabel1;
     }
 
-    public void setjTextArea1(JTextArea jTextArea1) {
-        this.jTextArea1 = jTextArea1;
+    public void setjLabel1(JLabel jLabel1) {
+        this.jLabel1 = jLabel1;
     }
 
-    public JList<String> getjList1() {
-        return jListClient;
+    public JLabel getjLabelClient() {
+        return jLabelClient;
     }
 
-    public void setjList1(JList<String> jList1) {
-        this.jListClient = jList1;
+    public void setjLabelClient(JLabel jLabelClient) {
+        this.jLabelClient = jLabelClient;
     }
+
+    public JLabel getjLabelCompte() {
+        return jLabelCompte;
+    }
+
+    public void setjLabelCompte(JLabel jLabelCompte) {
+        this.jLabelCompte = jLabelCompte;
+    }
+
+    public JScrollPane getjScrollPane3() {
+        return jScrollPane3;
+    }
+
+    public void setjScrollPane3(JScrollPane jScrollPane3) {
+        this.jScrollPane3 = jScrollPane3;
+    }
+
+    public JScrollPane getjScrollPane4() {
+        return jScrollPane4;
+    }
+
+    public void setjScrollPane4(JScrollPane jScrollPane4) {
+        this.jScrollPane4 = jScrollPane4;
+    }
+
+    public JTable getjTableClient() {
+        return jTableClient;
+    }
+
+    public void setjTableClient(JTable jTableClient) {
+        this.jTableClient = jTableClient;
+    }
+
+    public JTable getjTableCompte() {
+        return jTableCompte;
+    }
+
+    public void setjTableCompte(JTable jTableCompte) {
+        this.jTableCompte = jTableCompte;
+    }
+
+    public JTextField getjTextFieldMontant() {
+        return jTextFieldMontant;
+    }
+
+    public void setjTextFieldMontant(JTextField jTextFieldMontant) {
+        this.jTextFieldMontant = jTextFieldMontant;
+    }
+
+  
+
+   
+
+  
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
