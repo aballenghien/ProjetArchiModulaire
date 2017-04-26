@@ -29,8 +29,8 @@ public class AfficherCompte implements IAfficheur {
 	}
 
 	@Override
-	public ArrayList<String> afficherEntete(Object o) {
-            Compte c = (Compte) o;
+	public ArrayList<String> afficherEntete() {
+       
 		ArrayList lstentetecompte= new ArrayList();
 		lstentetecompte.add("Numéro_Compte");
 		lstentetecompte.add("Solde");

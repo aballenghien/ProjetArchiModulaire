@@ -15,6 +15,6 @@ public interface IAfficheur {
 
 	public ArrayList<String> afficher(Object o);
 
-	public ArrayList<String> afficherEntete(Object o);
+	public ArrayList<String> afficherEntete();
 
 }

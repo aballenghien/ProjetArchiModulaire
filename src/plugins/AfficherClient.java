@@ -29,8 +29,8 @@ public class AfficherClient implements IAfficheur {
 	}
 
 	@Override
-	public ArrayList<String> afficherEntete(Object o) {
-            	Client c = (Client) o;
+	public ArrayList<String> afficherEntete() {
+            
 		ArrayList<String> lstEnteteCompte = new ArrayList();
                 lstEnteteCompte.add("Code_Client");
                 lstEnteteCompte.add("Nom");
