@@ -392,6 +392,8 @@ public class JFrameBanque extends javax.swing.JFrame {
                 JFrameBanque j = new JFrameBanque();
                 Banque banque = new Banque();
                 Loader loader = Loader.getInstance();
+                loader.setRepertoireConfig(args[0]);
+                loader.loadPluginsDescriptions();
                 // on charge la liste des description de plugins liées à la contraite IAfficheur
                 j.setListAfficheurPlugins(loader.getPluginsDescriptions(IAfficheur.class));
                 //on charge la liste des descriptions de plugins liées à la contrainte IModifCompte

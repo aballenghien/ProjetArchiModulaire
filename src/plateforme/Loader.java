@@ -16,9 +16,8 @@ import plugins.DescriptionPlugins;
 public class Loader {
 
     private static Loader loader = null;
+    private String repertoireConfig;
 
-    //A adapter selon l'emplacement du répertoire config
-    private final String NOM_REPERTOIRE = "D:\\DOCUMENTS\\DEVELOPPEMENT\\NET BEANS\\Projet_Architecture_modulaire\\src\\appli\\config";
     private final ArrayList<IDescription> lstDescPlugins;
 
     /**
@@ -27,7 +26,6 @@ public class Loader {
      */
     private Loader() {
         this.lstDescPlugins = new ArrayList<>();
-        loadPluginsDescriptions();
     }
 
     public static Loader getInstance() {
@@ -41,8 +39,8 @@ public class Loader {
      * Charge la liste de toutes les descriptions de plugins à partir des
      * fichier de config présent dans le répertoire config
      */
-    private void loadPluginsDescriptions() {
-        File file = new File(NOM_REPERTOIRE);
+    public void loadPluginsDescriptions() {
+        File file = new File(repertoireConfig);
         // on récupère tous les fichiers
         File[] files = file.listFiles();
         if (files != null) {
@@ -109,4 +107,10 @@ public class Loader {
         return o;
 
     }
+
+    public void setRepertoireConfig(String repertoireConfig) {
+        this.repertoireConfig = repertoireConfig;
+    }
+    
+    
 }
