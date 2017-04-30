@@ -2,7 +2,7 @@
 
 ## Exécution
   Lors de l'éxecution de ce petit programme, vous devrez passer en paramètre le nom du répertoire dans lequel se trouve toutes les descritpions des plugins.
-  Pour cela, exécutez la commande suivante : '''Projet_Architecture_modulaire.jar [chemin du répertoire entre guillemets]'''
+  Pour cela, exécutez la commande suivante : ```Projet_Architecture_modulaire.jar [chemin du répertoire entre guillemets]```
 
 ## Documentation
 
