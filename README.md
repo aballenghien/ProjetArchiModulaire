@@ -6,4 +6,4 @@
 
 ## Documentation
 
-Vous trouverz la documentation javadoc complète en accédant au fichier ProjetArchiModulaire/dist/javadoc/index.html
+Vous trouverz la documentation javadoc complète en accédant au fichier ```ProjetArchiModulaire/dist/javadoc/index.html```
