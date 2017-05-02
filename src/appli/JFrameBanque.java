@@ -237,60 +237,76 @@ public class JFrameBanque extends javax.swing.JFrame {
         jFrameOperations.setVisible(false);
     }//GEN-LAST:event_jButtonRetourActionPerformed
 
-    private IDescription getDescPlugins(String nom){
-        for(IDescription desc : this.getListAfficheurPlugins()){
-            if (desc.getNom().toLowerCase().contains(nom.toLowerCase())){
+    private IDescription getDescPlugins(String nom) {
+        for (IDescription desc : this.getListAfficheurPlugins()) {
+            if (desc.getNom().toLowerCase().contains(nom.toLowerCase())) {
+                return desc;
+            }
+        }
+        for (IDescription desc : this.getListModifieurPlugins()) {
+            if (desc.getNom().toLowerCase().contains(nom.toLowerCase())) {
                 return desc;
             }
         }
         return null;
-        
+
     }
+
     /**
      * Fonction faisant appel au plugins de modification du compte afin de
      * soustraire ou d'ajouter une somme au solde du compte sélectionné
      */
     public void effectuerOperation() {
-        if(this.getListModifieurPlugins().size()>0){
-        //Charge le plugins crediterCompte à parti de se description
-        IModifCompte modifCrediter = (IModifCompte) Loader.getInstance().getPlugin(this.getDescPlugins("crediter"));
-        //Charge le plugons debiterCompte  partir de la description
-        IModifCompte modifdebiter = (IModifCompte) Loader.getInstance().getPlugin(this.getDescPlugins("debiter"));
-        //Recherche le compte sélectionné parmi les comptes du client sélectionné
-        if (jTableCompte.getSelectedRow() >= 0) {
-            Compte c = this.getClient().chercherCompte(Integer.parseInt(jTableCompte.getValueAt(jTableCompte.getSelectedRow(), 0).toString()));
-            if (c != null) {
-                // récupère le montant
-                String text = jTextFieldMontant.getText();
-                float montant = 0;
-                if (text.length() > 0) {
-                    montant = Float.valueOf(text);
-                }
-                boolean operationEffectuee = false;
-                //Si le montant est positif, on fait appel au plugns crediterCompte
-                if (montant > 0) {
-                    operationEffectuee = modifCrediter.modifier(c, montant);
+        if (this.getListModifieurPlugins().size() > 0) {
+            //Charge le plugins crediterCompte à parti de se description
+            IDescription crediter = this.getDescPlugins("crediter");
+            if (crediter != null) {
+                IModifCompte modifCrediter = (IModifCompte) Loader.getInstance().getPlugin(crediter);
+                IDescription debiter = this.getDescPlugins("debiter");
+                if (debiter != null) {
+                    //Charge le plugons debiterCompte  partir de la description
+                    IModifCompte modifdebiter = (IModifCompte) Loader.getInstance().getPlugin(debiter);
+                    //Recherche le compte sélectionné parmi les comptes du client sélectionné
+                    if (jTableCompte.getSelectedRow() >= 0) {
+                        Compte c = this.getClient().chercherCompte(Integer.parseInt(jTableCompte.getValueAt(jTableCompte.getSelectedRow(), 0).toString()));
+                        if (c != null) {
+                            // récupère le montant
+                            String text = jTextFieldMontant.getText();
+                            float montant = 0;
+                            if (text.length() > 0) {
+                                montant = Float.valueOf(text);
+                            }
+                            boolean operationEffectuee = false;
+                            //Si le montant est positif, on fait appel au plugns crediterCompte
+                            if (montant > 0) {
+                                operationEffectuee = modifCrediter.modifier(c, montant);
 
-                    //S'il est négatif, on fait appel au plugins debiterCompte
-                } else if (montant < 0) {
-                    montant = Math.abs(montant);
-                    operationEffectuee = modifdebiter.modifier(c, montant);
-                }
-                //On affiche un message pour informer du déroulement de l'opération
-                if (operationEffectuee) {
-                    JOptionPane.showMessageDialog(null, "Votre opérations a été effectuée, nouveau solde du  compte : " + c.getSolde());
-                    jTextFieldMontant.setText("");
-                    afficherCompte(client);
+                                //S'il est négatif, on fait appel au plugins debiterCompte
+                            } else if (montant < 0) {
+                                montant = Math.abs(montant);
+                                operationEffectuee = modifdebiter.modifier(c, montant);
+                            }
+                            //On affiche un message pour informer du déroulement de l'opération
+                            if (operationEffectuee) {
+                                JOptionPane.showMessageDialog(null, "Votre opérations a été effectuée, nouveau solde du  compte : " + c.getSolde());
+                                jTextFieldMontant.setText("");
+                                afficherCompte(client);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Une erreur s'est produite lors de l'enregistrement de l'opération");
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Aucun compte sélectionné");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Aucun compte sélectionné");
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Une erreur s'est produite lors de l'enregistrement de l'opération");
+                    JOptionPane.showMessageDialog(null, "Erreur lors du chargement du plugin debiter, veuillez vérifier le fichier de configuration");
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Aucun compte sélectionné");
+                JOptionPane.showMessageDialog(null, "Erreur lors du chargement du plugin crediter, veuillez vérifier le fichier de configuration");
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Aucun compte sélectionné");
-        }
-        }else{
             JOptionPane.showMessageDialog(null, "Aucun plugins trouvé, veuillez vérifier le répertoire de configuration");
         }
     }
@@ -303,48 +319,63 @@ public class JFrameBanque extends javax.swing.JFrame {
      */
     public void afficherCompte(Client client) {
         //Chargement du plugins à partir de sa description
-        if(this.getListAfficheurPlugins().size()>0){
-        IAfficheur afficheur = (IAfficheur) Loader.getInstance().getPlugin(this.getDescPlugins("affichercompte"));
-        ArrayList<String> entete = afficheur.afficherEntete();
+        if (this.getListAfficheurPlugins().size() > 0) {
+            IDescription afficherCompte = this.getDescPlugins("affichercompte");
+            if (afficherCompte != null) {
+                IAfficheur afficheur = (IAfficheur) Loader.getInstance().getPlugin(afficherCompte);
+                ArrayList<String> entete = afficheur.afficherEntete();
 
-        //chargement des données du tableau
-        DefaultTableModel tableModel = (DefaultTableModel) this.jTableCompte.getModel();
-        tableModel.setRowCount(0);
-        tableModel.setColumnIdentifiers(entete.toArray());
-        ArrayList<String> compte;
+                //chargement des données du tableau
+                DefaultTableModel tableModel = (DefaultTableModel) this.jTableCompte.getModel();
+                tableModel.setRowCount(0);
+                tableModel.setColumnIdentifiers(entete.toArray());
+                ArrayList<String> compte;
 
-        for (Compte list : client.getComptes()) {
-            compte = afficheur.afficher(list);
-            tableModel.addRow(compte.toArray());
-        }
-        jTableCompte.setModel(tableModel);
-        }else{
-            ((DefaultTableModel)jTableCompte.getModel()).setRowCount(0);
+                for (Compte list : client.getComptes()) {
+                    compte = afficheur.afficher(list);
+                    tableModel.addRow(compte.toArray());
+                }
+                jTableCompte.setModel(tableModel);
+            } else {
+                JOptionPane.showMessageDialog(null, "Erreur lors du chargement du plugin compte, veuillez vérifier le fichier de configuration");
+
+            }
+        } else {
+            ((DefaultTableModel) jTableCompte.getModel()).setRowCount(0);
             JOptionPane.showMessageDialog(null, "Aucun plugins trouvé, veuillez vérifier le répertoire de configuration");
         }
     }
 
     /**
      * On affiche la liste des clients de la banque dans un tableau
+     *
      * @param banque Banque
      */
     public void afficherClient(Banque banque) {
-        if(this.getListAfficheurPlugins().size()>0){
-        IAfficheur afficheur = (IAfficheur) Loader.getInstance().getPlugin(this.getDescPlugins("afficherclient"));
+        if (this.getListAfficheurPlugins().size() > 0) {
+            IDescription afficherClient = this.getDescPlugins("afficherclient");
+            if (afficherClient != null) {
+                IAfficheur afficheur = (IAfficheur) Loader.getInstance().getPlugin(afficherClient);
 
-        ArrayList<String> entete = afficheur.afficherEntete();
-        DefaultTableModel tableModel = (DefaultTableModel) this.jTableClient.getModel();
-        tableModel.setRowCount(0);
-        tableModel.setColumnIdentifiers(entete.toArray());
-        ArrayList<String> unClient;
-        for (Client c : banque.getClients()) {
-            unClient = afficheur.afficher(c);
-            tableModel.addRow(unClient.toArray());
-        }
-        jTableClient.setModel(tableModel);
-        }else{            
-            ((DefaultTableModel)jTableClient.getModel()).setRowCount(0);
-            ((DefaultTableModel)jTableCompte.getModel()).setRowCount(0);
+                ArrayList<String> entete = afficheur.afficherEntete();
+                DefaultTableModel tableModel = (DefaultTableModel) this.jTableClient.getModel();
+                tableModel.setRowCount(0);
+                tableModel.setColumnIdentifiers(entete.toArray());
+                ArrayList<String> unClient;
+                for (Client c : banque.getClients()) {
+                    unClient = afficheur.afficher(c);
+                    tableModel.addRow(unClient.toArray());
+                }
+                jTableClient.setModel(tableModel);
+            } else {
+                ((DefaultTableModel) jTableClient.getModel()).setRowCount(0);
+                ((DefaultTableModel) jTableCompte.getModel()).setRowCount(0);
+                JOptionPane.showMessageDialog(null, "Erreur lors du chargement du plugin client, veuillez vérifier le fichier de configuration");
+
+            }
+        } else {
+            ((DefaultTableModel) jTableClient.getModel()).setRowCount(0);
+            ((DefaultTableModel) jTableCompte.getModel()).setRowCount(0);
             JOptionPane.showMessageDialog(null, "Aucun plugins trouvé, veuillez vérifier le répertoire de configuration");
         }
 
@@ -355,36 +386,41 @@ public class JFrameBanque extends javax.swing.JFrame {
      * tableau qui listera les opérations associées à ce compte
      */
     public void afficherOperation() {
-        if(this.listAfficheurPlugins.size()>0){
-        if (jTableCompte.getSelectedRow() >= 0) {
-            Compte c = this.getClient().chercherCompte(Integer.parseInt(jTableCompte.getValueAt(jTableCompte.getSelectedRow(), 0).toString()));
-            if (c != null) {
-                // on charge le plugns d'affichage à partir de sa description
-                IAfficheur afficheur = (IAfficheur) Loader.getInstance().getPlugin(this.getDescPlugins("afficheroperation"));
-                Client cl = c.getClient();
-                // on rappelle les informations du client sur la fenêtre
-                jLabelNomClient.setText("Client : " + cl.toString());
-                jLabelNumCompte.setText("Compte : " + String.valueOf(c.getNumeroCompte()));
+        if (this.listAfficheurPlugins.size() > 0) {
+            if (jTableCompte.getSelectedRow() >= 0) {
+                Compte c = this.getClient().chercherCompte(Integer.parseInt(jTableCompte.getValueAt(jTableCompte.getSelectedRow(), 0).toString()));
+                if (c != null) {
+                    IDescription afficherOperation = this.getDescPlugins("afficheroperation");
+                    if (afficherOperation != null) {
+                        // on charge le plugns d'affichage à partir de sa description
+                        IAfficheur afficheur = (IAfficheur) Loader.getInstance().getPlugin(afficherOperation);
+                        Client cl = c.getClient();
+                        // on rappelle les informations du client sur la fenêtre
+                        jLabelNomClient.setText("Client : " + cl.toString());
+                        jLabelNumCompte.setText("Compte : " + String.valueOf(c.getNumeroCompte()));
 
-                // on charge la liste des opérations
-                DefaultTableModel tableModel = (DefaultTableModel) jTableOperations.getModel();
-                tableModel.setRowCount(0);
-                ArrayList<String> entete = afficheur.afficherEntete();
-                tableModel.setColumnIdentifiers(entete.toArray());
-                ArrayList<String> operation;
-                for (Operation o : c.getOperations()) {
-                    operation = afficheur.afficher(o);
-                    tableModel.addRow(operation.toArray());
+                        // on charge la liste des opérations
+                        DefaultTableModel tableModel = (DefaultTableModel) jTableOperations.getModel();
+                        tableModel.setRowCount(0);
+                        ArrayList<String> entete = afficheur.afficherEntete();
+                        tableModel.setColumnIdentifiers(entete.toArray());
+                        ArrayList<String> operation;
+                        for (Operation o : c.getOperations()) {
+                            operation = afficheur.afficher(o);
+                            tableModel.addRow(operation.toArray());
+                        }
+                        jTableOperations.setModel(tableModel);
+                        jFrameOperations.setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Erreur lors du chargement du plugin opération, veuillez vérifier le fichier de configuration");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Aucun compte sélectionné");
                 }
-                jTableOperations.setModel(tableModel);
-                jFrameOperations.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(null, "Aucun compte sélectionné");
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Aucun compte sélectionné");
-        }
-        }else{
             JOptionPane.showMessageDialog(null, "Aucun plugins trouvé, veuillez vérifier le répertoire de configuration");
         }
 
