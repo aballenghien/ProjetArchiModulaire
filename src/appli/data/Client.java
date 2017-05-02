@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Client {
 
     private ArrayList<Compte> comptes;
-    private int Id;
+    private int id;
     private String nom;
     private String numeroTel;
     private String adresse;
@@ -14,7 +14,7 @@ public class Client {
         super();
         this.comptes = new ArrayList<>();
         this.nom = nom;
-        Id = id;
+        this.id = id;
         this.adresse = adresse;
         this.numeroTel = numero;
     }
@@ -28,11 +28,11 @@ public class Client {
     }
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        id = id;
     }
 
     public String getAdresse() {

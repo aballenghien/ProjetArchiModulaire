@@ -5,7 +5,7 @@ import java.util.Date;
 public class Operation {
 
     private Compte compte;
-    private Date dateEffectif;
+    private Date dateEffective;
     private Date dateReel;
     private int numeroOperation;
     private float soldeCompte;
@@ -15,7 +15,7 @@ public class Operation {
     public Operation(Compte compte, Date dateEffectif, Date dateReel, int numeroOperation, float solde) {
         super();
         this.compte = compte;
-        this.dateEffectif = dateEffectif;
+        this.dateEffective = dateEffectif;
         this.dateReel = dateReel;
         this.numeroOperation = numeroOperation;
         this.soldeCompte = solde;
@@ -23,12 +23,12 @@ public class Operation {
         this.debit = 0;
     }
 
-    public Date getDateEffectif() {
-        return dateEffectif;
+    public Date getDateEffective() {
+        return dateEffective;
     }
 
-    public void setDateEffectif(Date dateEffectif) {
-        this.dateEffectif = dateEffectif;
+    public void setDateEffective(Date dateEffective) {
+        this.dateEffective = dateEffective;
     }
 
     public Date getDateReel() {

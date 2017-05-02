@@ -15,7 +15,7 @@ public class AfficherOperation implements IAfficheur {
         SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
         ArrayList lstValeurs = new ArrayList();
         lstValeurs.add(operation.getNumeroOperation());
-        lstValeurs.add(sf.format(operation.getDateEffectif()));
+        lstValeurs.add(sf.format(operation.getDateEffective()));
         lstValeurs.add(sf.format(operation.getDateReel()));
         lstValeurs.add(String.valueOf(operation.getCredit()));
         lstValeurs.add(String.valueOf(operation.getDebit()));
